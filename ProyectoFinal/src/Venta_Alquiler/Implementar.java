@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectofinal;
+package Venta_Alquiler;
 
 /**
  *
  * @author alumno
  */
-public class ProyectoFinal {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
-    
+public interface Implementar {
+    public String imprimir();
+    public Double calcularTotal();
+    public Boolean existe();
 }
