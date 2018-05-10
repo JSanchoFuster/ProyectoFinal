@@ -6,6 +6,7 @@
 package Persona;
 
 import Fecha.*;
+import java.util.Date;
 
 /**
  *
@@ -14,10 +15,10 @@ import Fecha.*;
 public abstract class Persona {
     protected String dni;
     protected String nombre;
-    protected Fecha fecha_alta;
+    protected Date fecha_alta;
     protected boolean activo;
 
-    public Persona(String dni, String nombre, Fecha fecha_alta, boolean activo) {
+    public Persona(String dni, String nombre, Date fecha_alta, boolean activo) {
         this.dni = dni;
         this.nombre = nombre;
         this.fecha_alta = fecha_alta;
@@ -55,14 +56,14 @@ public abstract class Persona {
     /**
      * @return the fecha_alta
      */
-    public Fecha getFecha_alta() {
+    public Date getFecha_alta() {
         return fecha_alta;
     }
 
     /**
      * @param fecha_alta the fecha_alta to set
      */
-    public void setFecha_alta(Fecha fecha_alta) {
+    public void setFecha_alta(Date fecha_alta) {
         this.fecha_alta = fecha_alta;
     }
 

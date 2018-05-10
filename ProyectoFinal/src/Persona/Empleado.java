@@ -6,17 +6,20 @@
 package Persona;
 
 import Fecha.Fecha;
+import java.util.Date;
 
 /**
  *
  * @author alumno
  */
 public final class Empleado extends Persona{
+    private int cod_empleado;
     private String sede;
     private String categoria;
 
-    public Empleado(String sede, String categoria, String dni, String nombre, Fecha fecha_alta, boolean activo) {
+    public Empleado(int cod_empleado,String sede, String categoria, String dni, String nombre, Date fecha_alta, boolean activo) {
         super(dni, nombre, fecha_alta, activo);
+        this.cod_empleado = cod_empleado;
         this.sede = sede;
         this.categoria = categoria;
     }
@@ -51,8 +54,24 @@ public final class Empleado extends Persona{
 
     @Override
     public String toString() {
-        return super.toString() + "Empleado{" + "sede=" + sede + ", categoria=" + categoria + '}';
+        return super.toString() + "Empleado{" + "cod_empleado=" + getCod_empleado() + ", sede=" + getSede() + ", categoria=" + getCategoria() + '}';
     }
+
+    /**
+     * @return the cod_empleado
+     */
+    public int getCod_empleado() {
+        return cod_empleado;
+    }
+
+    /**
+     * @param cod_empleado the cod_empleado to set
+     */
+    public void setCod_empleado(int cod_empleado) {
+        this.cod_empleado = cod_empleado;
+    }
+
+    
 
     
     

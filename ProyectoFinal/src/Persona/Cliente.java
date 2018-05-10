@@ -6,6 +6,7 @@
 package Persona;
 
 import Fecha.Fecha;
+import java.util.Date;
 
 /**
  *
@@ -19,7 +20,7 @@ public final class Cliente extends Persona{
     private String formaPago;
     private String ccc;
 
-    public Cliente(String direccion, String poblacion, String cp, int tel_fijo, String formaPago, String ccc, String dni, String nombre, Fecha fecha_alta, boolean activo) {
+    public Cliente(String direccion, String poblacion, String cp, int tel_fijo, String formaPago, String ccc, String dni, String nombre, Date fecha_alta, boolean activo) {
         super(dni, nombre, fecha_alta, activo);
         this.direccion = direccion;
         this.poblacion = poblacion;

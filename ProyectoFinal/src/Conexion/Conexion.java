@@ -61,16 +61,16 @@ public class Conexion {
         }
     }
     
-    public boolean consultarDatos(String dni, String pass){
+    public Empleado consultarDatos(String dni, String pass){
     
-        boolean empleado = false;
+        Empleado empleado = null;
         
        try{ 
            conectar();
            st = con.createStatement();
            rs = st.executeQuery("Select * from empleado where DNI='"+dni+"' and pass='"+pass+"';");
             if (rs.next()) {
-                empleado= true; 
+                empleado= new Empleado(rs.getInt("cod_empleado"), rs.getString("sede"), rs.getString("categoria"), rs.getString("DNI"), rs.getString("nombre"), rs.getDate("fech_alta"), rs.getBoolean("activo"));
             }
            desconectar();
         } catch (SQLException ex) {
