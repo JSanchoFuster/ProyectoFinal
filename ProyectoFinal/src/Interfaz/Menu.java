@@ -5,8 +5,12 @@
  */
 package Interfaz;
 
+import Conexion.Conexion;
 import Persona.*;
+import Venta_Alquiler.*;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +32,9 @@ public class Menu extends javax.swing.JFrame {
         jTextField4.setText(empleado.getSede());
         jTextField3.setText(empleado.getCategoria());
         
+        con= new Conexion();
         this.empleado=empleado;
+        this.articulos=con.articulos();
     }
 
     /**
@@ -152,10 +158,9 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
@@ -234,12 +239,27 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setText("Articulo");
 
         jMenuItem3.setText("Añadir Articulo nuevo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem3);
 
         jMenuItem4.setText("Borrar Articulos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem4);
 
         jMenuItem5.setText("Ver Articulos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
@@ -248,9 +268,19 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.setText("Cliente");
 
         jMenuItem6.setText("Añadir Cliente");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Borrar Cliente");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem7);
 
         jMenuBar1.add(jMenu4);
@@ -300,6 +330,39 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        NuevoArticulo ventana = new NuevoArticulo();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        articulos = con.articulos();
+        JOptionPane.showMessageDialog(this, mostrarArticulos(articulos));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        int codigo;
+        codigo=Integer.valueOf(JOptionPane.showInputDialog(this, "Dime el codigo del producto que vas a borrar"));
+        if(con.borrarArticulo(codigo)==true){
+            JOptionPane.showMessageDialog(this,"Se ha borrado el artículo satisfactoriamente");
+        }else{
+            JOptionPane.showMessageDialog(this,"ERROR:No se ha encontrado el codigo de producto especificado");
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        NuevoCliente ventana = new NuevoCliente();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        BorrarCliente ventana = new BorrarCliente();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -331,8 +394,19 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
        ;
     }
+    
+    private String mostrarArticulos(ArrayList<Articulo> articulos){
+    String aux = "";
+    aux="ARTICULOS: \n";
+        for (int i = 0; i < articulos.size(); i++) {
+            aux+= "Codigo Producto: " + articulos.get(i).getCodigo() + " || Tipo: " + articulos.get(i).getObservacion() + " || Stock: " + articulos.get(i).getCantidad() + "\n";
+        }
+    return aux;
+    }
 
     Empleado empleado;
+    ArrayList<Articulo> articulos;
+    Conexion con;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

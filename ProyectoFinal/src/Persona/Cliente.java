@@ -29,6 +29,8 @@ public final class Cliente extends Persona{
         this.formaPago = formaPago;
         this.ccc = ccc;
     }
+    
+    
 
     /**
      * @return the direccion
