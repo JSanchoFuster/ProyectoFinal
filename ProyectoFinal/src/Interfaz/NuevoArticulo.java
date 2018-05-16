@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Conexion.Conexion;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,7 @@ public class NuevoArticulo extends javax.swing.JFrame {
         jLabel1.setEnabled(false);
         jTextField1.setEnabled(false);
         con = new Conexion();
+        
     }
 
     /**
@@ -266,6 +268,7 @@ public class NuevoArticulo extends javax.swing.JFrame {
         });
     }
     Conexion con;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

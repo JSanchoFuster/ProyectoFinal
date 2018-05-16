@@ -160,6 +160,56 @@ public class Conexion {
     return dnis;
     }
     
+    public ArrayList<String> conseguirDNIEmpleado(){
+        ArrayList<String> dnis = new ArrayList<>();
+        try {
+            conectar();
+            st = con.createStatement();
+            rs = st.executeQuery("Select DNI from empleado where categoria='comercial'");
+                while(rs.next()){
+                    dnis.add(rs.getString(1));
+                }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    return dnis;
+    }
+    
+    public ArrayList<String> conseguirCodArticulo(){
+        ArrayList<String> codigo = new ArrayList<>();
+        try {
+            conectar();
+            st = con.createStatement();
+            rs = st.executeQuery("Select codigo from articulo");
+                while(rs.next()){
+                    codigo.add(rs.getString(1));
+                }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    return codigo;
+    }
+    
+    public Articulo conseguirArticulo(int codigo){
+        
+        Articulo articulo = null;
+        try {
+            conectar();
+            st = con.createStatement();
+            rs = st.executeQuery("Select * from articulo where codigo="+codigo+"");
+                while(rs.next()){
+                    articulo = new Articulo(rs.getInt(1),rs.getString(2),rs.getDouble(4),rs.getInt(3),rs.getString(5));
+                }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+         
+       return articulo;
+    }
+    
     public Cliente conseguirCliente(String dni){
         Cliente c1=null;
         try {

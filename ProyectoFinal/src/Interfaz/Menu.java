@@ -289,6 +289,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu2.setText("Venta");
 
         jMenuItem8.setText("Hacer Venta");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setText("Borrar Venta");
@@ -362,6 +367,12 @@ public class Menu extends javax.swing.JFrame {
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Ventas ventana = new Ventas();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
