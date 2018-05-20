@@ -33,7 +33,8 @@ public class Conexion {
     private ResultSet rs;
 
     public Conexion() {
-        this.url = "jdbc:mysql://192.168.4.141:3310/pr_proyectofinal";
+        //this.url = "jdbc:mysql://192.168.4.141:3310/pr_proyectofinal";
+        this.url = "jdbc:mysql://192.168.1.38:3310/pr_proyectofinal";
         this.usuario = "jsancho";
         this.pass = "Admin1234";
     }
@@ -254,6 +255,50 @@ public class Conexion {
             System.out.println("Error");
         }
     return articulos;
+    }
+    
+    public void añadirVenta(String DNIcliente,String DNIempleado,boolean pagado,String formaPago,int lineaVenta,int articulo,int cantidad,double total){
+    
+    try {
+            conectar();
+            pt = con.prepareStatement("insert into venta values(0,sysdate(),select cod_cliente from cliente where DNI=?,select cod_empleado from empleado where DNI=?,?,?,?,?,?,?);");
+            
+            pt.setString(1,DNIcliente);
+            pt.setString(2,DNIempleado);
+            pt.setBoolean(3,pagado);
+            pt.setString(4,formaPago);
+            pt.setInt(5,lineaVenta);
+            pt.setInt(6,articulo);
+            pt.setInt(7,cantidad);
+            pt.setDouble(8,total);
+            
+            pt.executeUpdate();
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    
+    }
+    
+    public void añadirAlquiler(Date fechaFin,String dnicliente,int linea,int articulo,int cantidad,double total){
+    
+    try {
+            conectar();
+            pt = con.prepareStatement("insert into alquiler values(0,sysdate(),?,select cod_cliente from cliente where DNI=?,?,?,?,?);");
+            
+            pt.setDate(1,(java.sql.Date)fechaFin);
+            pt.setString(2,dnicliente);
+            pt.setInt(3,linea);
+            pt.setInt(4,articulo);
+            pt.setInt(5,cantidad);
+            pt.setDouble(6,total);
+            
+            pt.executeUpdate();
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    
     }
     
 }
