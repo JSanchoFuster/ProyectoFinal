@@ -30,10 +30,11 @@ public class Alquiler extends javax.swing.JFrame {
         total=0.0;
         modelo= new DefaultListModel();
         codigoVentas = new ArrayList<>();
+        cantidadVentas = new ArrayList<>();
         jList1.setModel(modelo);
         validado=false;
         jComboBox1.setModel(cargarModeloCliente(con.conseguirDNI()));
-        jComboBox3.setModel(cargarModeloArticulos(con.conseguirCodArticulo()));
+        jComboBox3.setModel(cargarModeloArticulos(con.conseguirCodArticuloAlquiler()));
     }
 
     private DefaultComboBoxModel cargarModeloCliente(ArrayList<String> dnis){
@@ -346,6 +347,7 @@ public class Alquiler extends javax.swing.JFrame {
         if (!(cabecera1.equalsIgnoreCase("Codigo Articulo"))){
         modelo.addElement(jTextField3.getText() + " Cod: " + cabecera1 + " Cantidad: " + jSpinner1.getValue());
         codigoVentas.add(Integer.parseInt(cabecera1));
+        cantidadVentas.add((int)jSpinner1.getValue());
         total += (Double.valueOf(jTextField2.getText()) * (int)jSpinner1.getValue());
         jTextField1.setText(Double.toString(total));
         jList1.setModel(modelo);
@@ -358,9 +360,13 @@ public class Alquiler extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String cabecera1 = (String)jComboBox1.getSelectedItem();
-        for (int i = 1; i <= jList1.getLastVisibleIndex(); i++) {
-            con.añadirAlquiler((Date)jSpinner2.getValue(), cabecera1, i,/*Guardar Valores en un array de codigos articulo*/,/*Guardar Valores en un array de cantidad Articulos*/,Double.valueOf(jTextField1.getText()));
+        java.util.Date utilDate = (Date) jSpinner2.getValue();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        int cod_contrato = con.indiceAlquiler();
+        for (int i = 0; i < codigoVentas.size(); i++) {
+            con.añadirAlquiler(cod_contrato,sqlDate, cabecera1, i,codigoVentas.get(i),cantidadVentas.get(i),Double.valueOf(jTextField1.getText()));
         }
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -404,6 +410,7 @@ public class Alquiler extends javax.swing.JFrame {
     Double total;
     DefaultListModel modelo;
     ArrayList<Integer> codigoVentas;
+    ArrayList<Integer> cantidadVentas;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

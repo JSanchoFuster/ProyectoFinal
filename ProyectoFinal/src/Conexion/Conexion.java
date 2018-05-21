@@ -33,8 +33,8 @@ public class Conexion {
     private ResultSet rs;
 
     public Conexion() {
-        //this.url = "jdbc:mysql://192.168.4.141:3310/pr_proyectofinal";
-        this.url = "jdbc:mysql://192.168.1.38:3310/pr_proyectofinal";
+        this.url = "jdbc:mysql://192.168.4.141:3310/pr_proyectofinal";
+        //this.url = "jdbc:mysql://192.168.1.38:3310/pr_proyectofinal";
         this.usuario = "jsancho";
         this.pass = "Admin1234";
     }
@@ -177,7 +177,7 @@ public class Conexion {
     return dnis;
     }
     
-    public ArrayList<String> conseguirCodArticulo(){
+    public ArrayList<String> conseguirCodArticuloVenta(){
         ArrayList<String> codigo = new ArrayList<>();
         try {
             conectar();
@@ -192,6 +192,39 @@ public class Conexion {
         }
     return codigo;
     }
+    
+    public ArrayList<String> conseguirCodArticuloStock(){
+        ArrayList<String> codigo = new ArrayList<>();
+        try {
+            conectar();
+            st = con.createStatement();
+            rs = st.executeQuery("Select codigo from articulo where matricula is NULL");
+                while(rs.next()){
+                    codigo.add(rs.getString(1));
+                }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    return codigo;
+    }
+    
+    public ArrayList<String> conseguirCodArticuloAlquiler(){
+        ArrayList<String> codigo = new ArrayList<>();
+        try {
+            conectar();
+            st = con.createStatement();
+            rs = st.executeQuery("Select codigo from articulo where matricula<>\"\"");
+                while(rs.next()){
+                    codigo.add(rs.getString(1));
+                }
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    return codigo;
+    }
+    
     
     public Articulo conseguirArticulo(int codigo){
         
@@ -257,11 +290,43 @@ public class Conexion {
     return articulos;
     }
     
-    public void añadirVenta(String DNIcliente,String DNIempleado,boolean pagado,String formaPago,int lineaVenta,int articulo,int cantidad,double total){
+    public int indiceAlquiler(){
+            int indice =0;
+            try {
+                conectar();
+                st = con.createStatement();
+                rs = st.executeQuery("Select max(cod_contrato) from alquiler");
+                    if(rs.next()){
+                        indice = rs.getInt(1);
+                    }
+                desconectar();
+            } catch (SQLException ex) {
+                System.out.println("Error");
+            }
+     return (indice+1);
+    }
+    
+    public int indiceVentas(){
+            int indice =0;
+            try {
+                conectar();
+                st = con.createStatement();
+                rs = st.executeQuery("Select max(nVenta) from venta");
+                    if(rs.next()){
+                        indice = rs.getInt(1);
+                    }
+                desconectar();
+            } catch (SQLException ex) {
+                System.out.println("Error");
+            }
+     return (indice+1);
+    }
+    
+    public void añadirVenta(int nventa,String DNIcliente,String DNIempleado,boolean pagado,String formaPago,int lineaVenta,int articulo,int cantidad,double total){
     
     try {
             conectar();
-            pt = con.prepareStatement("insert into venta values(0,sysdate(),select cod_cliente from cliente where DNI=?,select cod_empleado from empleado where DNI=?,?,?,?,?,?,?);");
+            pt = con.prepareStatement("insert into venta values("+nventa+",sysdate(),(select cod_cliente from cliente where DNI=?),(select cod_empleado from empleado where DNI=?),?,?,?,?,?,?);");
             
             pt.setString(1,DNIcliente);
             pt.setString(2,DNIempleado);
@@ -280,11 +345,11 @@ public class Conexion {
     
     }
     
-    public void añadirAlquiler(Date fechaFin,String dnicliente,int linea,int articulo,int cantidad,double total){
+    public void añadirAlquiler(int cod_contrato,Date fechaFin,String dnicliente,int linea,int articulo,int cantidad,double total){
     
     try {
             conectar();
-            pt = con.prepareStatement("insert into alquiler values(0,sysdate(),?,select cod_cliente from cliente where DNI=?,?,?,?,?);");
+            pt = con.prepareStatement("insert into alquiler values("+cod_contrato+",sysdate(),?,(select cod_cliente from cliente where DNI=?),?,?,?,?);");
             
             pt.setDate(1,(java.sql.Date)fechaFin);
             pt.setString(2,dnicliente);
@@ -301,4 +366,20 @@ public class Conexion {
     
     }
     
+    public void actualizarStock(int codigoArticulo, int cantidad){
+    
+        try {
+            conectar();
+            pt = con.prepareStatement("UPDATE articulo set stock = stock+? where codigo=?;");
+            
+            pt.setInt(1, cantidad);
+            pt.setInt(2,codigoArticulo);
+            
+            pt.executeUpdate();
+            desconectar();
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+        
+    } 
 }

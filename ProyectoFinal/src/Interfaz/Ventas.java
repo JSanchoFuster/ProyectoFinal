@@ -29,11 +29,12 @@ public class Ventas extends javax.swing.JFrame {
         total=0.0;
         modelo= new DefaultListModel();
         codigoVentas = new ArrayList<>();
+        cantidadVentas = new ArrayList<>();
         jList1.setModel(modelo);
         validado=false;
         jComboBox1.setModel(cargarModeloCliente(con.conseguirDNI()));
         jComboBox2.setModel(cargarModeloEmpleado(con.conseguirDNIEmpleado()));
-        jComboBox3.setModel(cargarModeloArticulos(con.conseguirCodArticulo()));
+        jComboBox3.setModel(cargarModeloArticulos(con.conseguirCodArticuloVenta()));
     }
 
     private DefaultComboBoxModel cargarModeloCliente(ArrayList<String> dnis){
@@ -350,6 +351,7 @@ public class Ventas extends javax.swing.JFrame {
         if (!(cabecera1.equalsIgnoreCase("Codigo Articulo"))){
         modelo.addElement(jTextField3.getText() + " Cod: " + cabecera1 + " Cantidad: " + jSpinner1.getValue());
         codigoVentas.add(Integer.parseInt(cabecera1));
+        cantidadVentas.add((int)jSpinner1.getValue());
         total += (Double.valueOf(jTextField2.getText()) * (int)jSpinner1.getValue());
         jTextField1.setText(Double.toString(total));
         jList1.setModel(modelo);
@@ -363,9 +365,11 @@ public class Ventas extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String cabecera1 = (String)jComboBox1.getSelectedItem();
         String cabecera2 = (String)jComboBox2.getSelectedItem();
-        for (int i = 1; i <= jList1.getLastVisibleIndex(); i++) {
-            con.añadirVenta(cabecera1, cabecera2, jCheckBox1.isSelected(), (String)jComboBox4.getSelectedItem(), i,/*Guardar Valores en un array de codigos articulo*/,/*Guardar Valores en un array de cantidad Articulos*/,Double.valueOf(jTextField1.getText()));
+        int nventa = con.indiceVentas();
+        for (int i = 0; i < codigoVentas.size(); i++) {
+            con.añadirVenta(nventa,cabecera1, cabecera2, jCheckBox1.isSelected(), (String)jComboBox4.getSelectedItem(), i,codigoVentas.get(i),cantidadVentas.get(i),Double.valueOf(jTextField1.getText()));
         }
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -408,6 +412,7 @@ public class Ventas extends javax.swing.JFrame {
     Double total;
     DefaultListModel modelo;
     ArrayList<Integer> codigoVentas;
+    ArrayList<Integer> cantidadVentas;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

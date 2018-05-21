@@ -103,7 +103,7 @@ public class NuevoArticulo extends javax.swing.JFrame {
             }
         });
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 999, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
