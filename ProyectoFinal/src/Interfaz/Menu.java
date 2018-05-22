@@ -63,9 +63,6 @@ public class Menu extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -76,7 +73,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
 
@@ -220,22 +216,6 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
 
-        jMenu1.setBackground(new java.awt.Color(102, 102, 102));
-        jMenu1.setText("Datos");
-
-        jMenuItem1.setText("Modificar Datos Personales");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Darme de alta");
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-
         jMenu5.setBackground(new java.awt.Color(102, 102, 102));
         jMenu5.setText("Articulo");
         jMenu5.addActionListener(new java.awt.event.ActionListener() {
@@ -310,9 +290,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
-        jMenuItem9.setText("Borrar Venta");
-        jMenu2.add(jMenuItem9);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setBackground(new java.awt.Color(102, 102, 102));
@@ -350,10 +327,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         NuevoArticulo ventana = new NuevoArticulo();
         ventana.setVisible(true);
@@ -367,11 +340,15 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         int codigo;
+        try{
         codigo=Integer.valueOf(JOptionPane.showInputDialog(this, "Dime el codigo del producto que vas a borrar"));
         if(con.borrarArticulo(codigo)==true){
             JOptionPane.showMessageDialog(this,"Se ha borrado el artículo satisfactoriamente");
         }else{
             JOptionPane.showMessageDialog(this,"ERROR:No se ha encontrado el codigo de producto especificado");
+        }
+        }catch(Exception ex){
+        
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -461,23 +438,19 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

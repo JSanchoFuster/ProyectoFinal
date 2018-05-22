@@ -345,6 +345,7 @@ public class Alquiler extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String cabecera1 = (String)jComboBox3.getSelectedItem();
         if (!(cabecera1.equalsIgnoreCase("Codigo Articulo"))){
+        jComboBox3.removeItem(jComboBox3.getSelectedItem());
         modelo.addElement(jTextField3.getText() + " Cod: " + cabecera1 + " Cantidad: " + jSpinner1.getValue());
         codigoVentas.add(Integer.parseInt(cabecera1));
         cantidadVentas.add((int)jSpinner1.getValue());
@@ -352,6 +353,7 @@ public class Alquiler extends javax.swing.JFrame {
         jTextField1.setText(Double.toString(total));
         jList1.setModel(modelo);
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
