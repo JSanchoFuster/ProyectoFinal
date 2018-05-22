@@ -10,7 +10,22 @@ package Venta_Alquiler;
  * @author alumno
  */
 public interface Implementar {
+
+    /**
+     * Mostrara una factura
+     * @return Devuelve la factura
+     */
     public String imprimir();
+
+    /**
+     * Calcula el total de una venta o alquiler
+     * @return Total
+     */ 
     public Double calcularTotal();
+
+    /** 
+     * Comprueba si existe un producto
+     * @return Devulve si o no
+     */
     public Boolean existe();
 }

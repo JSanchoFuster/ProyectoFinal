@@ -5,7 +5,6 @@
  */
 package Persona;
 
-import Fecha.Fecha;
 import java.util.Date;
 
 /**
@@ -17,6 +16,16 @@ public final class Empleado extends Persona{
     private String sede;
     private String categoria;
 
+    /**
+     * Constructor de empleado
+     * @param cod_empleado
+     * @param sede
+     * @param categoria
+     * @param dni
+     * @param nombre
+     * @param fecha_alta
+     * @param activo
+     */
     public Empleado(int cod_empleado,String sede, String categoria, String dni, String nombre, Date fecha_alta, boolean activo) {
         super(dni, nombre, fecha_alta, activo);
         this.cod_empleado = cod_empleado;

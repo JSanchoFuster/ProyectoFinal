@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase conexion
  * @author alumno
  */
 public class Conexion {
@@ -32,6 +32,9 @@ public class Conexion {
     private PreparedStatement pt;
     private ResultSet rs;
 
+    /**
+     *Constructor que tiene como parametros la direccion del servidor
+     */
     public Conexion() {
         this.url = "jdbc:mysql://192.168.4.141:3310/pr_proyectofinal";
         //this.url = "jdbc:mysql://192.168.1.38:3310/pr_proyectofinal";
@@ -39,6 +42,12 @@ public class Conexion {
         this.pass = "Admin1234";
     }
 
+    /**
+     * Constructor que recibe los parametros de la direccion del servidor en el que se va a trabajar
+     * @param url Direccion ip servidor y tabla sobre la que se va a actuar
+     * @param usuario Usuario con permisos para poder hacer peticiones a la bd
+     * @param pass Contraseña del usuario
+     */
     public Conexion(String url, String usuario, String pass) {
         this.url = url;
         this.usuario = usuario;
@@ -65,6 +74,12 @@ public class Conexion {
         }
     }
     
+    /**
+     * Metodo que obtiene los datos para poder hacer login
+     * @param dni DNI del usuario
+     * @param pass Contraseña del usuario
+     * @return Devuelve un objeto empleado
+     */
     public Empleado consultarDatos(String dni, String pass){
     
         Empleado empleado = null;
@@ -84,6 +99,13 @@ public class Conexion {
       return empleado;  
     }
     
+    /**
+     * Inserta un articulo a la bd
+     * @param matricula Recibe o no la matricula del objeto
+     * @param stock Recibe la cantidad inicial con la que se va a partir
+     * @param precioUnidad Recibe un precio del articulo
+     * @param observacion Descripción del articulo
+     */
     public void anadirArticulo(String matricula,int stock, double precioUnidad,String observacion){
         
         try {
@@ -105,6 +127,11 @@ public class Conexion {
         
     }
     
+    /**
+     * Borra un articulo
+     * @param codigo Recibe la clave del articulo que se va a borrar
+     * @return Devuelve un booleano dependiendo de si existe o no el articulo
+     */
     public boolean borrarArticulo(int codigo){
     int devuelve=0;
         try {
@@ -122,6 +149,17 @@ public class Conexion {
         }
     }
     
+    /**
+     * Añade un cliente a la bd
+     * @param dni DNI del cliente
+     * @param nombre Nombre del cliente
+     * @param direccion Direccion del cliente
+     * @param poblacion Poblacion del cliente
+     * @param cp Codigo Postal del cliente
+     * @param telefono Telefono del cliente
+     * @param formaPago Forma de pago del cliente
+     * @param ccc Recibira o no un Codigo de Cuenta Bancaria
+     */
     public void anadirCliente(String dni, String nombre, String direccion, String poblacion, String cp, String telefono, String formaPago, String ccc ){
     
     try {
@@ -145,6 +183,10 @@ public class Conexion {
         
     }
     
+    /**
+     * Metodo que devuelve todos los DNI de los clientes
+     * @return Devuelve un array que contendrá todos los clientes actuales
+     */
     public ArrayList<String> conseguirDNI(){
         ArrayList<String> dnis = new ArrayList<>();
         try {
@@ -161,6 +203,10 @@ public class Conexion {
     return dnis;
     }
     
+    /**
+     * Metodo que devuelve todos los DNI de los empleados
+     * @return Devuelve un array que contendrá todos los DNI de los empleados actuales
+     */
     public ArrayList<String> conseguirDNIEmpleado(){
         ArrayList<String> dnis = new ArrayList<>();
         try {
@@ -177,6 +223,10 @@ public class Conexion {
     return dnis;
     }
     
+    /**
+     * Metodo que devuelve todos los codigos de los articulos
+     * @return Devuelve un array que contendrá todos los codigos de los articulos actuales
+     */
     public ArrayList<String> conseguirCodArticuloVenta(){
         ArrayList<String> codigo = new ArrayList<>();
         try {
@@ -193,6 +243,10 @@ public class Conexion {
     return codigo;
     }
     
+    /**
+     * Metodo que devuelve el stock de los productos que no tienen matricula
+     * @return Devuelve un array con todos los codigos
+     */
     public ArrayList<String> conseguirCodArticuloStock(){
         ArrayList<String> codigo = new ArrayList<>();
         try {
@@ -209,6 +263,10 @@ public class Conexion {
     return codigo;
     }
     
+    /**
+     * Metodo que devuelve el codigo de todos los productos que tienen matricula
+     * @return Devuelve un array con todos los codigos
+     */ 
     public ArrayList<String> conseguirCodArticuloAlquiler(){
         ArrayList<String> codigo = new ArrayList<>();
         try {
@@ -225,7 +283,11 @@ public class Conexion {
     return codigo;
     }
     
-    
+    /**
+     * Metodo que devuelve un articulo dependiendo de un codigo
+     * @param codigo Codigo del articulo
+     * @return Devuelve un objeto articulo
+     */
     public Articulo conseguirArticulo(int codigo){
         
         Articulo articulo = null;
@@ -244,6 +306,11 @@ public class Conexion {
        return articulo;
     }
     
+    /**
+     * Metodo que devuelve un cliente dependiendo de un dni
+     * @param dni DNI de un cliente
+     * @return Devolvera un objeto cliente
+     */
     public Cliente conseguirCliente(String dni){
         Cliente c1=null;
         try {
@@ -260,6 +327,10 @@ public class Conexion {
     return c1;
     }
     
+    /**
+     * Metodo que borra un cliente dependiendo de un dni
+     * @param dni DNI de un cliente
+     */
     public void borrarCliente(String dni){
     
     try {
@@ -272,6 +343,10 @@ public class Conexion {
         }   
     }
     
+    /**
+     * Metodo que devuelve todos los Articulos
+     * @return Devulve un array con objetos articulo
+     */
     public ArrayList<Articulo> articulos(){
         ArrayList<Articulo> articulos = new ArrayList<>();
         Articulo a1 = null;
@@ -290,6 +365,10 @@ public class Conexion {
     return articulos;
     }
     
+    /**
+     * Metodo que calcula el siguiente indice en la tabla alquiler
+     * @return Numero del indice
+     */
     public int indiceAlquiler(){
             int indice =0;
             try {
@@ -306,6 +385,10 @@ public class Conexion {
      return (indice+1);
     }
     
+    /**
+     * Metodo que calcula el siguiente indice en la tabla ventas
+     * @return Numero del indice
+     */
     public int indiceVentas(){
             int indice =0;
             try {
@@ -322,6 +405,18 @@ public class Conexion {
      return (indice+1);
     }
     
+    /**
+     * Metodo que añade una venta
+     * @param nventa indice de venta generado por el metodo indiceVentas()
+     * @param DNIcliente DNI del cliente 
+     * @param DNIempleado DNI del empleado 
+     * @param pagado Comprueba si esta pagado o no
+     * @param formaPago Forma de pago
+     * @param lineaVenta Linea de la venta
+     * @param articulo codigo del articulo al que se hace referencia
+     * @param cantidad cantidad del articulo a vender 
+     * @param total total de la venta
+     */
     public void añadirVenta(int nventa,String DNIcliente,String DNIempleado,boolean pagado,String formaPago,int lineaVenta,int articulo,int cantidad,double total){
     
     try {
@@ -345,6 +440,16 @@ public class Conexion {
     
     }
     
+    /**
+     * Metodo que añade un alquiler
+     * @param cod_contrato Codigo de contrato generado por el metodo indiceAlquiler()
+     * @param fechaFin Fecha de fin del contrato
+     * @param dnicliente DNI del cliente
+     * @param linea Linea de el alquiler
+     * @param articulo codigo del articulo al que se hace referencia
+     * @param cantidad cantidad del articulo que se va a alquilar
+     * @param total total del alquiler por dia
+     */
     public void añadirAlquiler(int cod_contrato,Date fechaFin,String dnicliente,int linea,int articulo,int cantidad,double total){
     
     try {
@@ -366,6 +471,11 @@ public class Conexion {
     
     }
     
+    /**
+     * Metodo que añade stock a un producto existente
+     * @param codigoArticulo codigo del articulo a aumentar stock
+     * @param cantidad cantidad a aumentar
+     */
     public void actualizarStock(int codigoArticulo, int cantidad){
     
         try {

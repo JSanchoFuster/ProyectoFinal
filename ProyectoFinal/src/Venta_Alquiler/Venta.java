@@ -5,9 +5,9 @@
  */
 package Venta_Alquiler;
 
-import Fecha.*;
 import Persona.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Venta implements Implementar{
     private int nVenta;
-    private Fecha fecha;
+    private Date fecha;
     private Cliente cliente;
     private boolean finalizado;
     private Empleado empleado;
@@ -24,7 +24,19 @@ public class Venta implements Implementar{
     private ArrayList<Articulo> articulos;
     private double total;
 
-    public Venta(int nVenta, Fecha fecha, Cliente cliente, boolean finalizado, Empleado empleado, boolean pagado, String formaPago, ArrayList<Articulo> articulos, double total) {
+    /**
+     * Constructor de venta
+     * @param nVenta
+     * @param fecha
+     * @param cliente
+     * @param finalizado
+     * @param empleado
+     * @param pagado
+     * @param formaPago
+     * @param articulos
+     * @param total
+     */
+    public Venta(int nVenta, Date fecha, Cliente cliente, boolean finalizado, Empleado empleado, boolean pagado, String formaPago, ArrayList<Articulo> articulos, double total) {
         this.nVenta = nVenta;
         this.fecha = fecha;
         this.cliente = cliente;
@@ -53,14 +65,14 @@ public class Venta implements Implementar{
     /**
      * @return the fecha
      */
-    public Fecha getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(Fecha fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -139,7 +151,6 @@ public class Venta implements Implementar{
      *
 
     /**
-     * @return the total
      */
     public double getTotal() {
         return total;
@@ -152,11 +163,19 @@ public class Venta implements Implementar{
         this.total = total;
     }
 
+    /**
+     * Metodo que muestra una factura
+     * @return Devuelve la factura
+     */
     @Override
     public String imprimir() {
         return "Venta{" + "nVenta=" + getnVenta() + ", fecha=" + getFecha() + ", cliente=" + getCliente() + ", finalizado=" + isFinalizado() + ", empleado=" + getEmpleado() + ", pagado=" + isPagado() + ", formaPago=" + getFormaPago() + ", articulos=" + getArticulos() + ", total=" + getTotal() + '}';
     }
 
+    /**
+     * Metodo que calcula el total de la venta
+     * @return Devuelve el total
+     */
     @Override
     public Double calcularTotal() {
         double total=0;
@@ -167,6 +186,10 @@ public class Venta implements Implementar{
        return total;     
     }
 
+    /**
+     * Comprueba si existe el articulo al que se ha hecho referencia
+     * @return Devuelve un boolean
+     */
     @Override
     public Boolean existe() {
         //Cargar lista de articulos de BD y comprobar si existe ese articulo, en caso de que no exista no se podra realizar la venta o alquiler

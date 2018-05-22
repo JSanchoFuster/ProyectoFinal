@@ -16,6 +16,14 @@ public class Articulo {
     private int cantidad;
     private String observacion;
 
+    /**
+     * Constructor de articulo
+     * @param codigo
+     * @param matricula
+     * @param importeUnidad
+     * @param cantidad
+     * @param observacion
+     */
     public Articulo(int codigo, String matricula, double importeUnidad, int cantidad, String observacion) {
         this.codigo = codigo;
         this.matricula = matricula;

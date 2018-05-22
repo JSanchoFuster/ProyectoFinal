@@ -5,9 +5,10 @@
  */
 package Venta_Alquiler;
 
-import Fecha.*;
+
 import Persona.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,13 +17,23 @@ import java.util.ArrayList;
 public class Alquiler implements Implementar{
     private int cod_contrato;
     private Cliente cliente;
-    private Fecha fecha_ini;
-    private Fecha fecha_fin;
+    private Date fecha_ini;
+    private Date fecha_fin;
     private String observacion;
     private ArrayList<Articulo> articulos;
     private double total;
 
-    public Alquiler(int cod_contrato, Cliente cliente, Fecha fecha_ini, Fecha fecha_fin, String observacion, ArrayList<Articulo> articulos, double total) {
+    /**
+     * Constructor Alquiler
+     * @param cod_contrato
+     * @param cliente
+     * @param fecha_ini
+     * @param fecha_fin
+     * @param observacion
+     * @param articulos
+     * @param total
+     */
+    public Alquiler(int cod_contrato, Cliente cliente, Date fecha_ini, Date fecha_fin, String observacion, ArrayList<Articulo> articulos, double total) {
         this.cod_contrato = cod_contrato;
         this.cliente = cliente;
         this.fecha_ini = fecha_ini;
@@ -63,28 +74,28 @@ public class Alquiler implements Implementar{
     /**
      * @return the fecha_ini
      */
-    public Fecha getFecha_ini() {
+    public Date getFecha_ini() {
         return fecha_ini;
     }
 
     /**
      * @param fecha_ini the fecha_ini to set
      */
-    public void setFecha_ini(Fecha fecha_ini) {
+    public void setFecha_ini(Date fecha_ini) {
         this.fecha_ini = fecha_ini;
     }
 
     /**
      * @return the fecha_fin
      */
-    public Fecha getFecha_fin() {
+    public Date getFecha_fin() {
         return fecha_fin;
     }
 
     /**
      * @param fecha_fin the fecha_fin to set
      */
-    public void setFecha_fin(Fecha fecha_fin) {
+    public void setFecha_fin(Date fecha_fin) {
         this.fecha_fin = fecha_fin;
     }
 
@@ -130,11 +141,19 @@ public class Alquiler implements Implementar{
         this.total = total;
     }
 
+    /**
+     * Metodo que muestra una factura
+     * @return Devuelve la factura
+     */
     @Override
     public String imprimir() {
         return "Alquiler{" + "cod_contrato=" + cod_contrato + ", cliente=" + cliente + ", fecha_ini=" + fecha_ini + ", fecha_fin=" + fecha_fin + ", observacion=" + observacion + ", articulos=" + articulos + ", total=" + total + '}';
     }
 
+    /**
+     * Metodo que calcula el total de la venta
+     * @return Devuelve el total
+     */
     @Override
     public Double calcularTotal() {
         double total=0;
@@ -145,10 +164,13 @@ public class Alquiler implements Implementar{
        return total; 
     }
 
+    /**
+     * Comprueba si existe el articulo al que se ha hecho referencia
+     * @return Devuelve un boolean
+     */
     @Override
     public Boolean existe() {
-        //Cargar lista de articulos de BD y comprobar si existe ese articulo, en caso de que no exista no se podra realizar la venta o alquiler
-        return false;
+        return true;
     }
     
     

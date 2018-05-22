@@ -5,7 +5,6 @@
  */
 package Persona;
 
-import Fecha.*;
 import java.util.Date;
 
 /**
@@ -13,11 +12,19 @@ import java.util.Date;
  * @author Javier Sancho
  */
 public abstract class Persona {
+
     protected String dni;
     protected String nombre;
     protected Date fecha_alta;
     protected boolean activo;
 
+    /**
+     * Constructor de persona
+     * @param dni
+     * @param nombre
+     * @param fecha_alta
+     * @param activo
+     */
     public Persona(String dni, String nombre, Date fecha_alta, boolean activo) {
         this.dni = dni;
         this.nombre = nombre;
