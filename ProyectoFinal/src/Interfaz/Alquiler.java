@@ -109,7 +109,7 @@ public class Alquiler extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -141,7 +141,7 @@ public class Alquiler extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
 
         jScrollPane1.setViewportView(jList1);
 
@@ -345,13 +345,13 @@ public class Alquiler extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String cabecera1 = (String)jComboBox3.getSelectedItem();
         if (!(cabecera1.equalsIgnoreCase("Codigo Articulo"))){
-        jComboBox3.removeItem(jComboBox3.getSelectedItem());
         modelo.addElement(jTextField3.getText() + " Cod: " + cabecera1 + " Cantidad: " + jSpinner1.getValue());
         codigoVentas.add(Integer.parseInt(cabecera1));
         cantidadVentas.add((int)jSpinner1.getValue());
         total += (Double.valueOf(jTextField2.getText()) * (int)jSpinner1.getValue());
         jTextField1.setText(Double.toString(total));
         jList1.setModel(modelo);
+        jComboBox3.removeItem(jComboBox3.getSelectedItem());
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
